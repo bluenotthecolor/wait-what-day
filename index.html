@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>What Day Is It?</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --base: #ffe4ef;
+        --ink: #ffd0e4;
+        --dot: #ff7ab8;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+          env(safe-area-inset-bottom) env(safe-area-inset-left);
+        min-height: 100vh;
+        min-height: 100dvh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: var(--base);
+        color: #222222;
+
+        font-family:
+          "Bricolage Grotesque", "Arial Black", Arial, sans-serif;
+        overflow-x: hidden;
+      }
+
+      ::selection {
+        background: var(--dot);
+        color: #222222;
+      }
+
+      ::-moz-selection {
+        background: var(--dot);
+        color: #222222;
+      }
+
+      .bg {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        background: var(--base);
+        pointer-events: none;
+      }
+
+      .wall {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 160vmax;
+        height: 160vmax;
+        transform: translate(-50%, -50%) rotate(-9deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .row {
+        font-family: "Bricolage Grotesque", "Arial Black", Impact, sans-serif;
+        font-weight: 800;
+        font-size: 12vmax;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+        white-space: pre;
+        overflow: hidden;
+      }
+
+      .track {
+        display: inline-block;
+        animation: slide 90s linear infinite;
+      }
+
+      .row:nth-child(even) .track {
+        animation-direction: reverse;
+        animation-duration: 120s;
+      }
+
+      @keyframes slide {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .dots {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(var(--dot) 1.6px, transparent 2.2px);
+        background-size: 11px 11px;
+        -webkit-mask-image:
+          radial-gradient(circle at 0% 0%, #000 0%, transparent 42%),
+          radial-gradient(circle at 100% 100%, #000 0%, transparent 42%);
+        mask-image:
+          radial-gradient(circle at 0% 0%, #000 0%, transparent 42%),
+          radial-gradient(circle at 100% 100%, #000 0%, transparent 42%);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .track {
+          animation: none;
+        }
+      }
+
+      .container {
+        text-align: center;
+        padding: 32px 20px;
+        width: min(520px, 100%);
+      }
+
+      .day {
+        font-size: clamp(40px, 13.5vw, 72px);
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        line-height: 1.05;
+        overflow-wrap: anywhere;
+      }
+
+      .date {
+        margin-top: 8px;
+        font-size: clamp(18px, 5vw, 24px);
+        color: #6a6a6a;
+      }
+
+      .time {
+        margin-top: 18px;
+        font-size: 16px;
+        color: #4a4a4a;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .info {
+        margin-top: 28px;
+        font-size: 15px;
+        color: #707070;
+        line-height: 1.8;
+      }
+
+      .quote {
+        margin: 32px auto 0;
+        max-width: 360px;
+        min-height: 64px;
+      }
+
+      .quote-text {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333333;
+        font-style: italic;
+      }
+
+      .quote-author {
+        margin-top: 6px;
+        font-size: 13px;
+        color: #707070;
+      }
+
+      .birthday {
+        margin: 36px auto 0;
+        padding-top: 24px;
+        max-width: 320px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        color: #555555;
+      }
+
+      .birthday-title {
+        font-size: 13px;
+        color: #707070;
+        margin-bottom: 10px;
+      }
+
+      .birthday-form {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .birthday input[type="date"] {
+        font: inherit;
+        font-size: 16px;
+        min-height: 44px;
+        min-width: 0;
+        padding: 8px 10px;
+        border: 1px solid #cccccc;
+        border-radius: 6px;
+        color: #222222;
+        background: #ffffff;
+      }
+
+      .birthday button {
+        font: inherit;
+        min-height: 44px;
+        padding: 8px 18px;
+        border: 0;
+        border-radius: 6px;
+        background: #222222;
+        color: #ffffff;
+        cursor: pointer;
+      }
+
+      @media (hover: hover) {
+        .birthday button:hover {
+          background: #444444;
+        }
+      }
+
+      .birthday input:focus-visible,
+      .birthday button:focus-visible {
+        outline: 2px solid #222222;
+        outline-offset: 2px;
+      }
+
+      .birthday-note {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #808080;
+      }
+
+      .birthday-error {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #c0392b;
+      }
+
+      .birthday-saved {
+        font-size: 18px;
+        color: #222222;
+        font-weight: 700;
+      }
+
+      .birthday-countdown {
+        margin-top: 6px;
+        color: #6a6a6a;
+      }
+
+      .birthday-today {
+        font-size: 28px;
+        font-weight: 700;
+        color: #222222;
+      }
+
+      .birthday-today-sub {
+        margin-top: 6px;
+        color: #6a6a6a;
+      }
+
+      .confetti {
+        position: fixed;
+        top: -40px;
+        font-size: 24px;
+        pointer-events: none;
+        animation: fall linear forwards;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+        }
+      }
+
+      @media (min-width: 1400px) {
+        .container {
+          width: 640px;
+        }
+
+        .day {
+          font-size: 88px;
+        }
+
+        .date {
+          font-size: 28px;
+        }
+
+        .time {
+          font-size: 18px;
+        }
+
+        .info,
+        .birthday {
+          font-size: 16px;
+        }
+
+        .quote {
+          max-width: 440px;
+        }
+
+        .quote-text {
+          font-size: 18px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .confetti {
+          display: none;
+        }
+
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg" aria-hidden="true">
+      <div class="wall" id="wall"></div>
+      <div class="dots"></div>
+    </div>
+
+    <main class="container">
+      <div class="day" id="day">MOANday</div>
+
+      <div class="date" id="date">September 10, 2026</div>
+
+      <div class="time" id="time">00:00:00</div>
+
+      <div class="info">
+        <div id="dayOfYear"></div>
+        <div id="week"></div>
+        <div id="remaining"></div>
+      </div>
+
+      <section class="quote" id="quote" aria-live="polite">
+        <div class="quote-text" id="quoteText"></div>
+        <div class="quote-author" id="quoteAuthor"></div>
+      </section>
+
+      <section class="birthday" id="birthday"></section>
+    </main>
+
+    <script>
+      const ONE_DAY = 1000 * 60 * 60 * 24;
+      const STORAGE_KEY = "birthday";
+
+      const MONTHS = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      const CURSED_DAYS = [
+        "SUCKday",
+        "MOANday",
+        "TONGUEday",
+        "WETday",
+        "THIRSTday",
+        "FREAKday",
+        "SLUTday",
+      ];
+
+      const PALETTES = [
+        { base: "#ffe4ef", ink: "#ffd0e4", dot: "#ff7ab8" },
+        { base: "#ece8ff", ink: "#ddd5ff", dot: "#8d7bff" },
+        { base: "#ffe6e1", ink: "#ffd3cb", dot: "#ff6b5a" },
+        { base: "#e2f5ff", ink: "#cdeaff", dot: "#3aa5ff" },
+        { base: "#f1fbd0", ink: "#e3f4a8", dot: "#8fbf00" },
+        { base: "#ffe0f4", ink: "#ffc4e8", dot: "#ff2fa0" },
+        { base: "#ffeadb", ink: "#ffd6bb", dot: "#ff8a3d" },
+      ];
+
+      function applyPalette(dayIndex) {
+        const p = PALETTES[dayIndex];
+        const root = document.documentElement.style;
+        root.setProperty("--base", p.base);
+        root.setProperty("--ink", p.ink);
+        root.setProperty("--dot", p.dot);
+      }
+
+      function buildWall(dayName) {
+        const half = (dayName + " \u2726 ").repeat(10);
+        let rows = "";
+        for (let i = 0; i < 12; i++) {
+          rows += `<div class="row"><div class="track">${half}${half}</div></div>`;
+        }
+        document.getElementById("wall").innerHTML = rows;
+      }
+
+      function isLeapYear(year) {
+        return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+      }
+
+      function getWeekNumber(date) {
+        const firstDay = new Date(date.getFullYear(), 0, 1);
+
+        return Math.ceil(
+          ((date - firstDay) / 86400000 + firstDay.getDay() + 1) / 7,
+        );
+      }
+
+      function loadBirthday() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return null;
+
+          const data = JSON.parse(raw);
+          if (
+            data &&
+            Number.isInteger(data.year) &&
+            Number.isInteger(data.month) &&
+            Number.isInteger(data.day)
+          ) {
+            return data;
+          }
+        } catch (e) {
+        }
+        return null;
+      }
+
+      function saveBirthday(data) {
+        try {
+          if (localStorage.getItem(STORAGE_KEY)) return false;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function occurrence(year, month, day) {
+        if (month === 1 && day === 29 && !isLeapYear(year)) day = 28;
+        return new Date(year, month, day);
+      }
+
+      function getNextBirthday(bday, now) {
+        const today = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+        );
+
+        let year = today.getFullYear();
+        let target = occurrence(year, bday.month, bday.day);
+
+        if (target < today) {
+          year += 1;
+          target = occurrence(year, bday.month, bday.day);
+        }
+
+        return {
+          year,
+          daysLeft: Math.round((target - today) / ONE_DAY),
+        };
+      }
+
+      function ordinal(n) {
+        const s = ["th", "st", "nd", "rd"];
+        const v = n % 100;
+        return n + (s[(v - 20) % 10] || s[v] || s[0]);
+      }
+
+      const birthdayEl = document.getElementById("birthday");
+      let confettiStarted = false;
+
+      function renderBirthday() {
+        const bday = loadBirthday();
+
+        if (!bday) {
+          renderForm();
+          return;
+        }
+
+        const now = new Date();
+        const next = getNextBirthday(bday, now);
+        const dateText = `${MONTHS[bday.month]} ${bday.day}`;
+
+        if (next.daysLeft === 0) {
+          const age = next.year - bday.year;
+          const ageText =
+            age > 0 ? `Enjoy turning ${age}!` : "Hope it's a great one!";
+
+          birthdayEl.innerHTML = `
+            <div class="birthday-today">🎂 Happy Birthday!</div>
+            <div class="birthday-today-sub">${ageText}</div>
+          `;
+
+          startConfetti();
+          return;
+        }
+
+        const countdown =
+          next.daysLeft === 1
+            ? "Tomorrow!"
+            : `${next.daysLeft} days until your birthday`;
+
+        birthdayEl.innerHTML = `
+          <div class="birthday-title">Your birthday</div>
+          <div class="birthday-saved">${dateText}</div>
+          <div class="birthday-countdown">${countdown}</div>
+        `;
+      }
+
+      function renderForm(errorText) {
+        const todayStr = new Date().toISOString().slice(0, 10);
+
+        birthdayEl.innerHTML = `
+          <div class="birthday-title">When's your birthday?</div>
+          <div class="birthday-form">
+            <input type="date" id="birthdayInput" max="${todayStr}" aria-label="Your birthday" />
+            <button type="button" id="birthdaySave">Save</button>
+          </div>
+          <div class="birthday-note">You can only save one, and it stays in this browser.</div>
+          ${errorText ? `<div class="birthday-error">${errorText}</div>` : ""}
+        `;
+
+        document
+          .getElementById("birthdaySave")
+          .addEventListener("click", onSaveClick);
+      }
+
+      function onSaveClick() {
+        const value = document.getElementById("birthdayInput").value;
+
+        if (!value) {
+          renderForm("Pick your birthday first.");
+          return;
+        }
+
+        const [year, month, day] = value.split("-").map(Number);
+
+        if (year < 1900 || value > new Date().toISOString().slice(0, 10)) {
+          renderForm("That date doesn't look right.");
+          return;
+        }
+
+        const ok = confirm(
+          `Save ${MONTHS[month - 1]} ${day}, ${year} as your birthday? You can't change it afterwards.`,
+        );
+        if (!ok) return;
+
+        const saved = saveBirthday({ year, month: month - 1, day });
+
+        if (!saved && !loadBirthday()) {
+          renderForm("Couldn't save. Your browser may be blocking storage.");
+          return;
+        }
+
+        renderBirthday();
+      }
+
+      function startConfetti() {
+        if (confettiStarted) return;
+        confettiStarted = true;
+
+        const pieces = ["🎉", "🎈", "🎂", "🎊", "✨"];
+
+        for (let i = 0; i < 30; i++) {
+          const el = document.createElement("div");
+          el.className = "confetti";
+          el.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+          el.style.left = Math.random() * 100 + "vw";
+          el.style.animationDuration = 3 + Math.random() * 3 + "s";
+          el.style.animationDelay = Math.random() * 2 + "s";
+          document.body.appendChild(el);
+
+          el.addEventListener("animationend", () => el.remove());
+        }
+      }
+
+      const QUOTE_KEY = "dailyQuote";
+      const QUOTE_API = "https://dummyjson.com/quotes/random";
+
+      const FALLBACK_QUOTES = [
+        {
+          quote: "The only way to do great work is to love what you do.",
+          author: "Steve Jobs",
+        },
+        {
+          quote: "It always seems impossible until it's done.",
+          author: "Nelson Mandela",
+        },
+        {
+          quote: "Well done is better than well said.",
+          author: "Benjamin Franklin",
+        },
+        {
+          quote: "Do what you can, with what you have, where you are.",
+          author: "Theodore Roosevelt",
+        },
+        {
+          quote:
+            "Whether you think you can or you think you can't, you're right.",
+          author: "Henry Ford",
+        },
+        {
+          quote: "The best way out is always through.",
+          author: "Robert Frost",
+        },
+        {
+          quote: "Everything you can imagine is real.",
+          author: "Pablo Picasso",
+        },
+      ];
+
+      function getDateKey() {
+        const d = new Date();
+        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      }
+
+      function showQuote(q) {
+        document.getElementById("quoteText").textContent =
+          `\u201C${q.quote}\u201D`;
+        document.getElementById("quoteAuthor").textContent =
+          `\u2014 ${q.author}`;
+      }
+
+      async function loadQuote() {
+        const dateKey = getDateKey();
+
+        try {
+          const cached = JSON.parse(localStorage.getItem(QUOTE_KEY));
+          if (cached && cached.date === dateKey && cached.quote) {
+            showQuote(cached);
+            return;
+          }
+        } catch (e) {
+        }
+
+        try {
+          const res = await fetch(QUOTE_API);
+          if (!res.ok) throw new Error("Bad response");
+
+          const data = await res.json();
+          const q = { date: dateKey, quote: data.quote, author: data.author };
+
+          showQuote(q);
+
+          try {
+            localStorage.setItem(QUOTE_KEY, JSON.stringify(q));
+          } catch (e) {
+          }
+        } catch (e) {
+          const i = Math.floor(Date.now() / ONE_DAY) % FALLBACK_QUOTES.length;
+          showQuote(FALLBACK_QUOTES[i]);
+        }
+      }
+
+      let lastRenderedDay = null;
+
+      function update() {
+        const now = new Date();
+        const dayName = CURSED_DAYS[now.getDay()];
+
+        document.getElementById("day").textContent = dayName;
+
+        document.getElementById("date").textContent =
+          `${MONTHS[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+        document.getElementById("time").textContent = now.toLocaleTimeString();
+
+        const startOfYear = new Date(now.getFullYear(), 0, 0);
+
+        const difference = now - startOfYear;
+
+        const dayOfYear = Math.floor(difference / ONE_DAY);
+
+        const totalDays = isLeapYear(now.getFullYear()) ? 366 : 365;
+
+        document.getElementById("dayOfYear").textContent =
+          `Day ${dayOfYear} of ${totalDays}`;
+
+        document.getElementById("week").textContent =
+          `Week ${getWeekNumber(now)}`;
+
+        const endOfYear = new Date(now.getFullYear() + 1, 0, 1);
+
+        const daysRemaining = Math.ceil((endOfYear - now) / ONE_DAY);
+
+        document.getElementById("remaining").textContent =
+          `${daysRemaining} days left this year`;
+
+        const todayKey = now.toDateString();
+        if (todayKey !== lastRenderedDay) {
+          lastRenderedDay = todayKey;
+          applyPalette(now.getDay());
+          buildWall(dayName);
+          document.title = `${dayName} | What Day Is It?`;
+          loadQuote();
+          if (loadBirthday()) renderBirthday();
+        }
+      }
+
+      renderBirthday();
+      update();
+
+      setInterval(update, 1000);
+    </script>
+  </body>
+</html>
