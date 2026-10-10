@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
 
     <title>What Day Is It?</title>
 
@@ -19,9 +22,10 @@
       }
 
       :root {
-        --base: #ffe4ef;
-        --ink: #ffd0e4;
-        --dot: #ff7ab8;
+        --base: #fff4d6;
+        --ink: #ffe7a0;
+        --dot: #f5a300;
+        --select-text: #1a1a1a;
       }
 
       html {
@@ -43,19 +47,18 @@
         background: var(--base);
         color: #222222;
 
-        font-family:
-          "Bricolage Grotesque", "Arial Black", Arial, sans-serif;
+        font-family: "Bricolage Grotesque", "Arial Black", Arial, sans-serif;
         overflow-x: hidden;
       }
 
       ::selection {
         background: var(--dot);
-        color: #222222;
+        color: var(--select-text);
       }
 
       ::-moz-selection {
         background: var(--dot);
-        color: #222222;
+        color: var(--select-text);
       }
 
       .bg {
@@ -318,7 +321,6 @@
         .confetti {
           display: none;
         }
-
       }
     </style>
   </head>
@@ -379,14 +381,74 @@
         "SLUTday",
       ];
 
+      // base = background, ink = wall text, dot = dots + selection background,
+      // select = text color when selected
       const PALETTES = [
-        { base: "#ffe4ef", ink: "#ffd0e4", dot: "#ff7ab8" },
-        { base: "#ece8ff", ink: "#ddd5ff", dot: "#8d7bff" },
-        { base: "#ffe6e1", ink: "#ffd3cb", dot: "#ff6b5a" },
-        { base: "#e2f5ff", ink: "#cdeaff", dot: "#3aa5ff" },
-        { base: "#f1fbd0", ink: "#e3f4a8", dot: "#8fbf00" },
-        { base: "#ffe0f4", ink: "#ffc4e8", dot: "#ff2fa0" },
-        { base: "#ffeadb", ink: "#ffd6bb", dot: "#ff8a3d" },
+        { base: "#fff4d6", ink: "#ffe7a0", dot: "#f5a300", select: "#1a1a1a" }, // Sunday
+        { base: "#dff7ec", ink: "#c3f0dc", dot: "#17a673", select: "#ffffff" }, // Monday
+        { base: "#e8ecff", ink: "#cfd8ff", dot: "#3d5afe", select: "#ffffff" }, // Tuesday
+        { base: "#f3e5ff", ink: "#e6ccff", dot: "#9b3dff", select: "#ffffff" }, // Wednesday
+        { base: "#ffe3e3", ink: "#ffc9c9", dot: "#e03131", select: "#ffffff" }, // Thursday
+        { base: "#e0f7f9", ink: "#bdeef3", dot: "#0e9fb0", select: "#002b33" }, // Friday
+        { base: "#ffe0f4", ink: "#ffc4e8", dot: "#ff2fa0", select: "#ffffff" }, // Saturday
+      ];
+
+      // Same quote for everyone on the same calendar day.
+      const QUOTES = [
+        {
+          quote: "The only way to do great work is to love what you do.",
+          author: "Steve Jobs",
+        },
+        {
+          quote: "It always seems impossible until it's done.",
+          author: "Nelson Mandela",
+        },
+        {
+          quote: "Well done is better than well said.",
+          author: "Benjamin Franklin",
+        },
+        {
+          quote: "Do what you can, with what you have, where you are.",
+          author: "Theodore Roosevelt",
+        },
+        {
+          quote:
+            "Whether you think you can or you think you can't, you're right.",
+          author: "Henry Ford",
+        },
+        {
+          quote: "The best way out is always through.",
+          author: "Robert Frost",
+        },
+        {
+          quote: "Everything you can imagine is real.",
+          author: "Pablo Picasso",
+        },
+        {
+          quote: "In the middle of difficulty lies opportunity.",
+          author: "Albert Einstein",
+        },
+        {
+          quote: "Be yourself; everyone else is already taken.",
+          author: "Oscar Wilde",
+        },
+        {
+          quote: "Simplicity is the ultimate sophistication.",
+          author: "Leonardo da Vinci",
+        },
+        {
+          quote: "Not all those who wander are lost.",
+          author: "J.R.R. Tolkien",
+        },
+        { quote: "Well begun is half done.", author: "Aristotle" },
+        {
+          quote: "The journey of a thousand miles begins with one step.",
+          author: "Lao Tzu",
+        },
+        {
+          quote: "Life is what happens while you're busy making other plans.",
+          author: "John Lennon",
+        },
       ];
 
       function applyPalette(dayIndex) {
@@ -395,6 +457,7 @@
         root.setProperty("--base", p.base);
         root.setProperty("--ink", p.ink);
         root.setProperty("--dot", p.dot);
+        root.setProperty("--select-text", p.select);
       }
 
       function buildWall(dayName) {
@@ -432,8 +495,7 @@
           ) {
             return data;
           }
-        } catch (e) {
-        }
+        } catch (e) {}
         return null;
       }
 
@@ -587,82 +649,17 @@
         }
       }
 
-      const QUOTE_KEY = "dailyQuote";
-      const QUOTE_API = "https://dummyjson.com/quotes/random";
+      // Picks the quote from the calendar date, so every visitor gets the same one that day.
+      function showDailyQuote(now) {
+        const dayNumber = Math.floor(
+          Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / ONE_DAY,
+        );
+        const q = QUOTES[dayNumber % QUOTES.length];
 
-      const FALLBACK_QUOTES = [
-        {
-          quote: "The only way to do great work is to love what you do.",
-          author: "Steve Jobs",
-        },
-        {
-          quote: "It always seems impossible until it's done.",
-          author: "Nelson Mandela",
-        },
-        {
-          quote: "Well done is better than well said.",
-          author: "Benjamin Franklin",
-        },
-        {
-          quote: "Do what you can, with what you have, where you are.",
-          author: "Theodore Roosevelt",
-        },
-        {
-          quote:
-            "Whether you think you can or you think you can't, you're right.",
-          author: "Henry Ford",
-        },
-        {
-          quote: "The best way out is always through.",
-          author: "Robert Frost",
-        },
-        {
-          quote: "Everything you can imagine is real.",
-          author: "Pablo Picasso",
-        },
-      ];
-
-      function getDateKey() {
-        const d = new Date();
-        return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-      }
-
-      function showQuote(q) {
         document.getElementById("quoteText").textContent =
           `\u201C${q.quote}\u201D`;
         document.getElementById("quoteAuthor").textContent =
           `\u2014 ${q.author}`;
-      }
-
-      async function loadQuote() {
-        const dateKey = getDateKey();
-
-        try {
-          const cached = JSON.parse(localStorage.getItem(QUOTE_KEY));
-          if (cached && cached.date === dateKey && cached.quote) {
-            showQuote(cached);
-            return;
-          }
-        } catch (e) {
-        }
-
-        try {
-          const res = await fetch(QUOTE_API);
-          if (!res.ok) throw new Error("Bad response");
-
-          const data = await res.json();
-          const q = { date: dateKey, quote: data.quote, author: data.author };
-
-          showQuote(q);
-
-          try {
-            localStorage.setItem(QUOTE_KEY, JSON.stringify(q));
-          } catch (e) {
-          }
-        } catch (e) {
-          const i = Math.floor(Date.now() / ONE_DAY) % FALLBACK_QUOTES.length;
-          showQuote(FALLBACK_QUOTES[i]);
-        }
       }
 
       let lastRenderedDay = null;
@@ -705,7 +702,7 @@
           applyPalette(now.getDay());
           buildWall(dayName);
           document.title = `${dayName} | What Day Is It?`;
-          loadQuote();
+          showDailyQuote(now);
           if (loadBirthday()) renderBirthday();
         }
       }
