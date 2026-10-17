@@ -1,66 +1,17 @@
  <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=F5C2E7&height=160&section=header&text=wait-what-day&fontSize=42&fontColor=ffffff&fontAlignY=38&animation=fadeIn" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=FBCFE8&height=170&section=header&text=wait-what-day%3F&fontSize=42&fontColor=ffffff&fontAlignY=38&animation=fadeIn" width="100%" />
 
-<img src="https://readme-typing-svg.demolab.com?font=Courier+Prime&size=16&duration=2800&pause=900&color=E8A7D1&center=true&vCenter=true&width=435&lines=what+day+is+it+even%3F;weekend+brain+rot+%3C3;your+birthday+deserves+attention;quotes+for+no+reason" alt="typing intro" />
+<img src="https://readme-typing-svg.demolab.com?font=Courier+Prime&size=16&duration=3000&pause=1000&color=DB8DB5&center=true&vCenter=true&width=440&lines=what+day+is+it+again%3F;friday+is+a+state+of+mind;quotes+for+your+little+brain;save+your+birthday+bestie" alt="typing animation" />
 
 <br/>
 
-<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="150" alt="confused cat" />
+<img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" width="180" alt="cute animated celebration" />
 
-**because sometimes you genuinely don't know what day it is.**
+**a tiny website for calendar confusion, weekend nonsense, and birthday remembering.**
 
-[![website](https://img.shields.io/badge/visit-the%20website-e8a7d1?style=flat-square&logo=googlechrome&logoColor=white)](https://wait-what-day.vercel.app/)
-[![made with love](https://img.shields.io/badge/made%20with-love%20%3C3-f5c2e7?style=flat-square)](https://github.com/bluenotthecolor/wait-what-day)
-
-</div>
-
----
-
-### ୨୧ what is this?
-
-**wait-what-day** is a little corner of the internet for when the days blur together and your brain has approximately two working cells.
-
-it's a fun little website featuring silly weekend names, random quotes, and a place to save your birthday so you don't lose track of your special day.
-
-### ♡ what's inside?
-
-<img align="right" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="125" alt="keyboard cat" />
-
-- ୨୧ **weekend names** — because saturday deserves a rebrand
-- ୨୧ **random quotes** — daily wisdom or absolute nonsense
-- ୨୧ **birthday saving** — keep your special day close
-- ୨୧ **cute vibes** — a tiny website for your daily dose of silly
-
-<br clear="right"/>
-
-### ⋆˚ some very important questions
-
-> is it friday yet?
-
-> what do you mean tomorrow is monday?
-
-> mentally, i'm already on the weekend.
-
-> another day, another questionable decision.
-
-### ୨୧ preview
-
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=soft&color=FCE7F3&height=80&section=header&text=weekend%20mode%3A%20loading...&fontSize=22&fontColor=BC7FA3" width="85%" />
-
-*the calendar is real. the weekend names are questionable.*
-
-</div>
-
-### ♡ made with
-
-<div align="center">
-
-<img src="https://img.shields.io/badge/creativity-100%25-e8a7d1?style=flat-square" />
-<img src="https://img.shields.io/badge/seriousness-0%25-f5c2e7?style=flat-square" />
-<img src="https://img.shields.io/badge/weekend%20energy-unlimited-e8a7d1?style=flat-square" />
+[![website](https://img.shields.io/badge/open%20the%20website-ffc6df?style=for-the-badge&logo=googlechrome&logoColor=white)](https://wait-what-day.vercel.app/)
+[![repository](https://img.shields.io/badge/source%20code-GitHub-e8a7d1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bluenotthecolor/wait-what-day)
 
 </div>
 
@@ -68,8 +19,115 @@ it's a fun little website featuring silly weekend names, random quotes, and a pl
 
 <div align="center">
 
-made with ♡ by [aym](https://github.com/bluenotthecolor)
+### ── ⋆⋅☆⋅⋆ ──
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=F5C2E7&height=100&section=footer" width="100%" />
+*the days are numbered. the brain cells are not.*
+
+### ── ⋆⋅☆⋅⋆ ──
+
+</div>
+
+### ୨୧ what's the deal?
+
+ever wake up and wonder if it's tuesday, friday, or somehow monday again?
+
+**wait-what-day** is a silly little website that makes keeping track of time a bit more fun. it brings together goofy weekend names, random quotes, and a spot to save your birthday.
+
+### ♡ features
+
+<table>
+<tr>
+<td width="50%">
+
+<div align="center">
+
+<img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" width="120" alt="excited celebration" />
+
+**weekend nonsense**
+
+</div>
+
+ridiculous names for the weekend, because the usual names aren't doing enough.
+
+</td>
+<td width="50%">
+
+<div align="center">
+
+<img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" width="120" alt="thinking animation" />
+
+**random quotes**
+
+</div>
+
+little bits of wisdom, questionable thoughts, and things to read when you're bored.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+<div align="center">
+
+<img src="https://media.giphy.com/media/g9582DNuQppxC/giphy.gif" width="120" alt="birthday celebration" />
+
+**birthday saving**
+
+</div>
+
+save your birthday so your special day doesn't sneak up on you.
+
+</td>
+<td width="50%">
+
+<div align="center">
+
+<img src="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif" width="120" alt="busy computer cat" />
+
+**little web project**
+
+</div>
+
+a fun, lightweight corner of the internet made for everyday chaos.
+
+</td>
+</tr>
+</table>
+
+### ⋆˚ quotes from the brain department
+
+> "i'll do it tomorrow."
+
+> "tomorrow is monday."
+
+> "actually, i never said which tomorrow."
+
+> "time is fake but birthdays are important."
+
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=Courier+Prime&size=15&duration=3500&pause=1200&color=DB8DB5&center=true&vCenter=true&width=400&lines=calendar%3A+updated;mental+state%3A+weekend;productivity%3A+under+investigation" alt="calendar status" />
+
+</div>
+
+---
+
+### ୨୧ the little details
+
+<div align="center">
+
+<img src="https://img.shields.io/badge/weekend%20enthusiasm-extremely%20high-f9c5df?style=flat-square" />
+<img src="https://img.shields.io/badge/calendar%20confidence-questionable-e8d3f5?style=flat-square" />
+<img src="https://img.shields.io/badge/birthday%20importance-maximum-fce7b2?style=flat-square" />
+
+</div>
+
+<div align="center">
+
+### made with ♡ by [aym](https://github.com/bluenotthecolor)
+
+*please remember what day it is. or don't.*
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=FBCFE8&height=100&section=footer" width="100%" />
 
 </div>
